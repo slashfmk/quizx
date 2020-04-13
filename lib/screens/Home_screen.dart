@@ -24,40 +24,40 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  List<Widget> createRadioList() {
-    List<Widget> widgets = [];
-    for (String optionals
-        in widget._genQuiz.getCategory().getCurrentOptional()) {
-      widgets.add(
-        RadioListTile(
-          value: optionals,
-          groupValue: selectedOption,
-          title: Text(
-            optionals,
-            style: TextStyle(fontSize: 14),
-          ),
-          onChanged: (current) {
-            setSelectedOptionals(current);
-          },
-          selected: true,
-        ),
-      );
-    }
-    return widgets;
-  }
+//  List<Widget> createRadioList() {
+//    List<Widget> widgets = [];
+//    for (String optionals
+//        in widget._genQuiz.getCategory().getCurrentOptional()) {
+//      widgets.add(
+//        RadioListTile(
+//          value: optionals,
+//          groupValue: selectedOption,
+//          title: Text(
+//            optionals,
+//            style: TextStyle(fontSize: 14),
+//          ),
+//          onChanged: (current) {
+//            setSelectedOptionals(current);
+//          },
+//          selected: true,
+//        ),
+//      );
+//    }
+//    return widgets;
+//  }
 
-  List<Widget> createOptionaList() {
-    List<Widget> widgets = [];
+  List<QOptional> createOptionaList() {
+    List<QOptional> widgets = [];
     for (String optionals
         in widget._genQuiz.getCategory().getCurrentOptional()) {
-      widgets.add(
-        QOptional(
-          child: Text(
-            optionals,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      );
+      widgets.add(new QOptional(
+        content: optionals,
+        onTap: () {
+          print('Choice: ${optionals}');
+          setSelectedOptionals(optionals);
+        },
+        isCorrect: false,
+      ));
     }
 
     return widgets;
@@ -145,10 +145,17 @@ class _HomeState extends State<Home> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.error,
-                                    size: 15,
-                                    color: kWhite,
+//                                  Icon(
+//                                    Icons.error,
+//                                    size: 15,
+//                                    color: kWhite,
+//                                  ),
+                                  Text(
+                                    'Wrong: ',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: kWhite),
                                   ),
                                   Text(
                                     ' ${incorrect.toString()}',
@@ -158,10 +165,17 @@ class _HomeState extends State<Home> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.check_circle,
-                                    size: 15,
-                                    color: kWhite,
+//                                  Icon(
+//                                    Icons.check_circle,
+//                                    size: 15,
+//                                    color: kWhite,
+//                                  ),
+                                  Text(
+                                    'Correct: ',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: kWhite),
                                   ),
                                   Text(
                                     ' ${correct.toString()}',
@@ -185,8 +199,8 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 child: Column(
                   //TODO: Implement radio
-                //  children: createRadioList(),
-                   children: createOptionaList(),
+                  // children: createRadioList(),
+                  children: createOptionaList(),
                 ),
               ),
             ),
@@ -207,7 +221,10 @@ class _HomeState extends State<Home> {
                           widget._genQuiz.getCategory().getCurrentQuestion(),
                           selectedOption,
                           widget._genQuiz
-                              .getCategory().getCurrentCorrectAnswer()));
+                              .getCategory()
+                              .getCurrentCorrectAnswer()));
+
+                      print(missedQ);
                     }
 
                     widget._genQuiz.getCategory().nextQuestion();
