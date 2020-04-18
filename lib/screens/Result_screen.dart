@@ -22,6 +22,26 @@ class Result_screen extends StatefulWidget {
 }
 
 class _Result_screenState extends State<Result_screen> {
+  // progressBar Color
+  Color colorPresentationPerformance() {
+    Color pBarColor;
+
+    String performResult = Calculation.getPerformance(Calculation.percentage(
+        widget.totalQ - widget.wrongAnswers.length, widget.totalQ));
+
+    if (performResult == 'Average') {
+      pBarColor = kYellowColor;
+    } else if (performResult == 'Good') {
+      pBarColor = Colors.orange;
+    } else if (performResult == 'Excellent') {
+      pBarColor = kGreenColor;
+    } else {
+      pBarColor = kRedColor;
+    }
+
+    return pBarColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,8 +125,10 @@ class _Result_screenState extends State<Result_screen> {
                                   Row(
                                     children: <Widget>[
                                       Text(
-                                        'Your performance: ',
-                                        style: TextStyle(color: kBlueColor),
+                                        'Performance: ',
+                                        style: TextStyle(
+                                            color: kBlueColor,
+                                            fontWeight: FontWeight.w400),
                                       ),
                                       Container(
                                         padding: EdgeInsets.symmetric(
@@ -114,7 +136,8 @@ class _Result_screenState extends State<Result_screen> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(7),
-                                            color: kRedColor),
+                                            color:
+                                                colorPresentationPerformance()),
                                         child: Text(
                                           Calculation.getPerformance(
                                               Calculation.percentage(
@@ -153,7 +176,7 @@ class _Result_screenState extends State<Result_screen> {
                                         100,
                                     backgroundColor: kGreyLight,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                        kRedColor),
+                                        colorPresentationPerformance()),
                                   ),
                                 ),
                                 Container(
