@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
+import 'package:quizx/util/constants.dart';
 
 class WQuestionRecap extends StatelessWidget {
-  final  WrongAnswerRecap wrongAnswerRecap;
+  final WrongAnswerRecap wrongAnswerRecap;
 
   WQuestionRecap({@required this.wrongAnswerRecap});
 
@@ -13,8 +14,8 @@ class WQuestionRecap extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 5),
       margin: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        color: Color(0xFFe4e7e4),
-        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: kDarkColor, width: .2),
+        borderRadius: BorderRadius.circular(0),
       ),
       width: double.infinity,
       child: Column(
@@ -25,16 +26,24 @@ class WQuestionRecap extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Question',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: kBlueColor,
+                  ),
                 ),
-                Text(this.wrongAnswerRecap.getQuestion())
+                Text(
+                  this.wrongAnswerRecap.getQuestion(),
+                  style: TextStyle(
+//                    color: kBlueColor,
+                      ),
+                )
               ],
             ),
           ),
           Divider(
-            height: 20,
-            thickness: 1,
-            color: Color(0xFFcccccc),
+            height: 10,
+            thickness: .2,
+            color: kGreyColor,
           ),
           Container(
             width: double.infinity,
@@ -42,23 +51,25 @@ class WQuestionRecap extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Your answer',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: kRedColor),
                 ),
                 Text(this.wrongAnswerRecap.getUserAnswer())
               ],
             ),
           ),
           Divider(
-            height: 20,
-            thickness: 1,
-            color: Color(0xFFcccccc),
+            height: 10,
+            thickness: .2,
+            color: kGreyColor,
           ),
           Container(
+            width: double.infinity,
             child: Column(
               children: <Widget>[
                 Text('Correct answer',
-                    style:
-                    TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: kGreenColor)),
                 Text(this.wrongAnswerRecap.getCorrectAnswer())
               ],
             ),

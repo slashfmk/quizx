@@ -4,12 +4,16 @@ import 'package:quizx/util/constants.dart';
 class QOptional extends StatelessWidget {
   final String content;
   final Function onTap;
-  final bool isCorrect;
+  bool state;
 
-  QOptional({@required this.content, this.onTap, this.isCorrect});
+  QOptional({@required this.content, this.onTap, this.state});
 
-  void setColor(bool isCorrect) {
-    if (isCorrect) {}
+  void setColor(bool st) {
+    this.state = st;
+  }
+
+  String getContent() {
+    return this.content;
   }
 
   @override
@@ -17,9 +21,8 @@ class QOptional extends StatelessWidget {
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
-        decoration: this.isCorrect
-            ? kCorrectAnswerDecoration
-            : kIncorrectAnswerDecoration,
+        decoration:
+            this.state ? kCorrectAnswerDecoration : kDefaultAnswerDecoration,
         width: double.infinity,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
@@ -28,7 +31,7 @@ class QOptional extends StatelessWidget {
           this.content,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: kWhite,
+            color: Color(0xFF757677),
           ),
         ),
         //con: Text(optionals, style: TextStyle(fontWeight: FontWeight.bold),

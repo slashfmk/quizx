@@ -55,8 +55,18 @@ class _HomeState extends State<Home> {
         onTap: () {
           print('Choice: ${optionals}');
           setSelectedOptionals(optionals);
+
+          setState(() {
+            for (QOptional q in createOptionaList()) {
+              q.getContent() == optionals
+                  ? q.setColor(true)
+                  : q.setColor(false);
+
+              print(q.getContent() == optionals);
+            }
+          });
         },
-        isCorrect: false,
+        state: false,
       ));
     }
 
@@ -199,6 +209,7 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
                 child: Column(
                   //TODO: Implement radio
+
                   // children: createRadioList(),
                   children: createOptionaList(),
                 ),
