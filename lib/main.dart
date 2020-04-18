@@ -16,14 +16,19 @@ class MyApp extends StatelessWidget {
     ));
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Quizx',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Home(),
+        '/result': (context) => Result_screen()
+      },
       theme: ThemeData(
           // primarySwatch: Colors.black,
           //    backgroundColor: Color(0xFF6d727b),
           //  scaffoldBackgroundColor: Color(0xFF13131f)
           // primarySwatch: Colors.blue,
           ),
-      home: Result_screen(),
+//      home: Home(),
     );
   }
 }

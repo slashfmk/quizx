@@ -5,6 +5,7 @@ import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/QOptional.dart';
 import 'package:quizx/widgets/ContainerRadius.dart';
+import 'package:quizx/screens/Result_screen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -244,6 +245,18 @@ class _HomeState extends State<Home> {
 
                   //  print(widget._genQuiz.getCategory().getCurrentOptional());
                 });
+
+                if (widget._genQuiz.getCategory().getCurrentQuestionNumber() >
+                    widget._genQuiz.getCategory().getNumberOfQuestions()) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Result_screen(
+                      category: widget._genQuiz.getCategory().getName(),
+                      wrongAnswers: missedQ,
+                      totalQ:
+                          widget._genQuiz.getCategory().getNumberOfQuestions(),
+                    );
+                  }));
+                }
               },
               child: Container(
                 // color: kMainColor,
@@ -259,7 +272,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '${widget._genQuiz.getCategory().isTheEnd() ? 'Next' : 'Result'}',
+                      '${widget._genQuiz.getCategory().isTheEnd() ? 'Result' : 'Next'}',
                       style: TextStyle(fontSize: 15, color: kWhite),
                     ),
                     Icon(

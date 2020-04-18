@@ -13,14 +13,15 @@ class Category {
   }
 
   // get title
-  String getName(){
+  String getName() {
     return this._categoryName;
   }
 
   // get title
-  String getDescription(){
+  String getDescription() {
     return this._categoryDesc;
   }
+
   // Add new Questions
   void addQuestion(Question question) {
     this._questions.add(question);
@@ -31,8 +32,8 @@ class Category {
     return this._questions.length;
   }
 
-  int getCurrentQuestionNumber(){
-    return this._questionNumber+1;
+  int getCurrentQuestionNumber() {
+    return this._questionNumber + 1;
   }
 
   // Get the current Question
@@ -47,16 +48,15 @@ class Category {
 
   // Go to the next question
   bool nextQuestion() {
-
-    if (this._questions.length - 1 > this._questionNumber) {
+    if (this._questionNumber - 1 < this._questions.length - 1) {
       this._questionNumber++;
       return true;
     }
     return false;
   }
 
-  bool isTheEnd(){
-    return this._questions.length - 1 > this._questionNumber ? true : false;
+  bool isTheEnd() {
+    return this._questionNumber >= this._questions.length - 1 ? true : false;
   }
 
   // All the current question options

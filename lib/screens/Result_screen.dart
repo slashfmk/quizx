@@ -4,22 +4,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/WQuestionRecap.dart';
+import 'package:quizx/screens/Home_screen.dart';
+import 'package:quizx/util/Calculation.dart';
 
 class Result_screen extends StatefulWidget {
   @override
-  final List<WrongAnswerRecap> wrongAnswers = [
-    new WrongAnswerRecap('Who founded paypal?', 'Bill Gates', 'Elon Musk'),
-    new WrongAnswerRecap('What is the best selling phone brand in the usa?',
-        'Samsung', 'Apple Iphone'),
-    new WrongAnswerRecap('What is the worst mobile phone provider in the US',
-        'At&t', 'T-Mobile'),
-    new WrongAnswerRecap('What is the worst mobile phone provider in the US',
-        'At&t', 'T-Mobile'),
-    new WrongAnswerRecap('What is the worst mobile phone provider in the US',
-        'At&t', 'T-Mobile'),
-    new WrongAnswerRecap(
-        'What is the worst mobile phone provider in the US', 'At&t', 'T-Mobile')
-  ];
+  final List<WrongAnswerRecap> wrongAnswers;
+  final int totalQ;
+  final String category;
+  Result_screen(
+      {@required this.category,
+      @required this.wrongAnswers,
+      @required this.totalQ});
 
   _Result_screenState createState() => _Result_screenState();
 // Result_screen({this.wrongAnswers});
@@ -72,7 +68,7 @@ class _Result_screenState extends State<Result_screen> {
                             ),
                           ),
                           Text(
-                            'Computer Science',
+                            '${widget.category}',
                             style: TextStyle(
                               color: Color(0xffcccccc),
                             ),
@@ -94,7 +90,7 @@ class _Result_screenState extends State<Result_screen> {
                           Row(
                             children: <Widget>[
                               Text(
-                                '97%',
+                                '${Calculation.percentage(widget.totalQ - widget.wrongAnswers.length, widget.totalQ).toInt().toString()}%',
                                 style: TextStyle(
                                     fontSize: 55, fontWeight: FontWeight.w300),
                               ),
@@ -120,7 +116,12 @@ class _Result_screenState extends State<Result_screen> {
                                                 BorderRadius.circular(7),
                                             color: kRedColor),
                                         child: Text(
-                                          'Average',
+                                          Calculation.getPerformance(
+                                              Calculation.percentage(
+                                                  widget.totalQ -
+                                                      widget
+                                                          .wrongAnswers.length,
+                                                  widget.totalQ)),
                                           style: TextStyle(
                                               fontSize: 11,
                                               color: kWhite,
@@ -145,7 +146,11 @@ class _Result_screenState extends State<Result_screen> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15.0),
                                   child: LinearProgressIndicator(
-                                    value: 0.3,
+                                    value: Calculation.percentage(
+                                            widget.totalQ -
+                                                widget.wrongAnswers.length,
+                                            widget.totalQ) /
+                                        100,
                                     backgroundColor: kGreyLight,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         kRedColor),
@@ -183,15 +188,15 @@ class _Result_screenState extends State<Result_screen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            'You missed: 54',
+                            'You missed: ${widget.wrongAnswers.length.toString()}',
                             style: TextStyle(fontSize: 13),
                           ),
                           Text(
-                            'You got 10',
+                            'You got: ${(widget.totalQ - widget.wrongAnswers.length).toString()}',
                             style: TextStyle(fontSize: 13),
                           ),
                           Text(
-                            'Total questions: 65',
+                            'Total questions: ${widget.totalQ}',
                             style: TextStyle(fontSize: 13),
                           )
                         ],
@@ -241,16 +246,21 @@ class _Result_screenState extends State<Result_screen> {
                           style: TextStyle(fontSize: 15, color: kWhite),
                         ),
                       ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: kMainColor,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Text(
-                          'Choose another subject',
-                          style: TextStyle(fontSize: 15, color: kWhite),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          decoration: BoxDecoration(
+                            color: kMainColor,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            'Choose another subject',
+                            style: TextStyle(fontSize: 15, color: kWhite),
+                          ),
                         ),
                       )
                     ],

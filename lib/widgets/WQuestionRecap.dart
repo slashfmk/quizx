@@ -31,11 +31,14 @@ class WQuestionRecap extends StatelessWidget {
                     color: kBlueColor,
                   ),
                 ),
-                Text(
-                  this.wrongAnswerRecap.getQuestion(),
-                  style: TextStyle(
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    this.wrongAnswerRecap.getQuestion(),
+                    style: TextStyle(
 //                    color: kBlueColor,
-                      ),
+                        ),
+                  ),
                 )
               ],
             ),
