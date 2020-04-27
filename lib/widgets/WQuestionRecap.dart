@@ -14,6 +14,7 @@ class WQuestionRecap extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 5),
       margin: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
+        color: kWhite,
         border: Border.all(color: kDarkColor, width: .2),
         borderRadius: BorderRadius.circular(0),
       ),
@@ -28,7 +29,8 @@ class WQuestionRecap extends StatelessWidget {
                   'Question',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: kBlueColor,
+                    //  color: kBlueColor,
+                    fontSize: 13,
                   ),
                 ),
                 Container(
@@ -36,6 +38,7 @@ class WQuestionRecap extends StatelessWidget {
                   child: Text(
                     this.wrongAnswerRecap.getQuestion(),
                     style: TextStyle(
+
 //                    color: kBlueColor,
                         ),
                   ),
@@ -54,8 +57,11 @@ class WQuestionRecap extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Your answer',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: kRedColor),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: kRedColor,
+                    fontSize: 13,
+                  ),
                 ),
                 Text(this.wrongAnswerRecap.getUserAnswer())
               ],
@@ -70,9 +76,14 @@ class WQuestionRecap extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: <Widget>[
-                Text('Correct answer',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: kGreenColor)),
+                Text(
+                  'Correct answer',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: kGreenColor,
+                    fontSize: 13,
+                  ),
+                ),
                 Text(this.wrongAnswerRecap.getCorrectAnswer())
               ],
             ),

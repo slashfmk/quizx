@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizx/controller/GenQuiz.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
@@ -275,9 +276,15 @@ class _HomeState extends State<Home> {
                       '${widget._genQuiz.getCategory().isTheEnd() ? 'Result' : 'Next'}',
                       style: TextStyle(fontSize: 15, color: kWhite),
                     ),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Icon(
-                      Icons.navigate_next,
+                      widget._genQuiz.getCategory().isTheEnd()
+                          ? FontAwesomeIcons.clipboardList
+                          : FontAwesomeIcons.chevronCircleRight,
                       color: kWhite,
+                      size: 15,
                     )
                   ],
                 ),

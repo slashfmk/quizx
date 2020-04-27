@@ -1,0 +1,51 @@
+{
+  "title" : "Computer science",
+  "description" : "All about computer science quiz",
+  "content" :
+  [
+    {
+      "id": 1,
+      "question": "Who was the father of computer",
+      "correct_answer": "Charlie Babbage",
+      "optionals": [
+        "Charlie Babbage",
+        "Dennis Ritchie",
+        "Charles Babbage",
+        "Ken Thompson"
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What is the full form of CPU?",
+      "correct_answer": "Central Processing Unit",
+      "optionals": [
+        "Central Process Unit",
+        "Central Programming Unit",
+        "Central Progressive Unit"
+      ]
+    },
+
+    {
+      "id": 3,
+      "question": "What is the full form of ALU?",
+      "correct_answer": "Arithmetic Logic Unit",
+      "optionals": [
+        "Arithmetic Local Unit",
+        "Advance Logical Unit",
+        "None of these"
+      ]
+    },
+
+    {
+      "id": 4,
+      "question": "Which part of the computer is considered as Brain of the Computer?",
+      "correct_answer": "Central Process Unit",
+      "optionals": [
+        "Random Access Memory",
+        "Read Only Memory",
+        "Hard Disk"
+      ]
+    }
+  ]
+
+}

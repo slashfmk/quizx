@@ -1,21 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/WQuestionRecap.dart';
 import 'package:quizx/screens/Home_screen.dart';
 import 'package:quizx/util/Calculation.dart';
+import 'package:quizx/widgets/RoundedButton.dart';
 
 class Result_screen extends StatefulWidget {
   @override
   final List<WrongAnswerRecap> wrongAnswers;
   final int totalQ;
   final String category;
-  Result_screen(
-      {@required this.category,
-      @required this.wrongAnswers,
-      @required this.totalQ});
+
+  Result_screen({
+    @required this.category,
+    @required this.wrongAnswers,
+    @required this.totalQ,
+  });
 
   _Result_screenState createState() => _Result_screenState();
 // Result_screen({this.wrongAnswers});
@@ -23,7 +27,7 @@ class Result_screen extends StatefulWidget {
 
 class _Result_screenState extends State<Result_screen> {
   // progressBar Color
-  Color colorPresentationPerformance() {
+  Color _colorPresentationPerformance() {
     Color pBarColor;
 
     String performResult = Calculation.getPerformance(Calculation.percentage(
@@ -50,6 +54,8 @@ class _Result_screenState extends State<Result_screen> {
           // color: kGreyLight,
           padding: EdgeInsets.only(top: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
 //
               Container(
@@ -57,8 +63,19 @@ class _Result_screenState extends State<Result_screen> {
                 // padding: EdgeInsets.all(5),
                 margin: EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                    //  border: Border.all(color: kGreyColor, width: .1),
-                    color: kMainColor),
+                  // border: Border.all(color: kGreyColor, width: .1),
+                  boxShadow: [
+                    BoxShadow(
+                        color: kGreyLight,
+                        blurRadius: 0.5,
+                        spreadRadius: 2.0,
+                        offset: Offset(
+                          0.0,
+                          0.0,
+                        ))
+                  ],
+                  color: kMainColor,
+                ),
 
                 // second part
                 width: double.infinity,
@@ -119,7 +136,7 @@ class _Result_screenState extends State<Result_screen> {
                               ),
                               Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Row(
@@ -137,7 +154,7 @@ class _Result_screenState extends State<Result_screen> {
                                             borderRadius:
                                                 BorderRadius.circular(7),
                                             color:
-                                                colorPresentationPerformance()),
+                                                _colorPresentationPerformance()),
                                         child: Text(
                                           Calculation.getPerformance(
                                               Calculation.percentage(
@@ -176,7 +193,7 @@ class _Result_screenState extends State<Result_screen> {
                                         100,
                                     backgroundColor: kGreyLight,
                                     valueColor: AlwaysStoppedAnimation<Color>(
-                                        colorPresentationPerformance()),
+                                        _colorPresentationPerformance()),
                                   ),
                                 ),
                                 Container(
@@ -229,65 +246,95 @@ class _Result_screenState extends State<Result_screen> {
                 ),
               ),
 
+              // list view Block
               Container(
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: kGreyLight,
+                  border: Border.all(color: kDarkColor, width: .2),
+                ),
                 //  padding: EdgeInsets.symmetric(vertical: 10),
                 width: double.infinity,
                 child: Column(
                   children: <Widget>[
-//
                     Container(
-                      height: 300,
-                      child: ListView.builder(
-                          itemCount: widget.wrongAnswers.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                                title: new WQuestionRecap(
-                                    wrongAnswerRecap:
-                                        widget.wrongAnswers[index]));
-                          }),
+                      decoration: BoxDecoration(
+                        color: Color(0xff272b34),
+                      ),
+                      //  margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.all(15),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        //  crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.clipboardList,
+                            color: Color(0xFFCCCCCC),
+                            size: 15,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Questions you have missed',
+                            style: TextStyle(
+                              color: Color(0xFFCCCCCC),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 350,
+                      child: this.widget.wrongAnswers.length > 0
+                          ? ListView.builder(
+                              itemCount: widget.wrongAnswers.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                    title: new WQuestionRecap(
+                                        wrongAnswerRecap:
+                                            widget.wrongAnswers[index]));
+                              },
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  FontAwesomeIcons.infoCircle,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                    'Nothing to show, because You got it all correct!'),
+                              ],
+                            ),
                     )
                   ],
                 ),
               ),
-              Expanded(
-                child: Container(
-                  //    decoration: BoxDecoration(color: Color(0xFFFF33aa)),
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: kMainColor,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Text(
-                          'Continue test',
-                          style: TextStyle(fontSize: 15, color: kWhite),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/');
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          decoration: BoxDecoration(
-                            color: kMainColor,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: Text(
-                            'Choose another subject',
-                            style: TextStyle(fontSize: 15, color: kWhite),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+              Container(
+                //    decoration: BoxDecoration(color: Color(0xFFFF33aa)),
+                padding: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    RoundedButton(
+                      text: "Main menu",
+                      icon: FontAwesomeIcons.checkSquare,
+                    ),
+                    RoundedButton(
+                      text: "Try again",
+                      icon: FontAwesomeIcons.redo,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                    )
+                  ],
                 ),
               )
             ],
