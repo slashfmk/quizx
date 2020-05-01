@@ -6,15 +6,15 @@ import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/QOptional.dart';
 import 'package:quizx/widgets/ContainerRadius.dart';
-import 'package:quizx/screens/Result_screen.dart';
+import 'package:quizx/screens/ResultScreen.dart';
 
-class Home extends StatefulWidget {
+class TestScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _TestScreenState createState() => _TestScreenState();
   final GenQuiz _genQuiz = new GenQuiz();
 }
 
-class _HomeState extends State<Home> {
+class _TestScreenState extends State<TestScreen> {
   String selectedOption;
   int correct = 0;
   int incorrect = 0;
@@ -250,7 +250,7 @@ class _HomeState extends State<Home> {
                 if (widget._genQuiz.getCategory().getCurrentQuestionNumber() >
                     widget._genQuiz.getCategory().getNumberOfQuestions()) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Result_screen(
+                    return ResultScreen(
                       category: widget._genQuiz.getCategory().getName(),
                       wrongAnswers: missedQ,
                       totalQ:

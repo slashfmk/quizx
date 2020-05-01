@@ -11,18 +11,8 @@ class GenQuiz {
   GenQuiz() {
     this._general =
         new Category("General Questions", "This is a bag of general questions");
-    // Questions
 
-//    List<String> opt0 = ["Snug", "plexxus", "Brinette"];
-//    Question q0 = new Question("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", "jarvis", opt0);
-//
-
-    List<String> opt1 = [
-      "Charlie Babbage",
-      "Dennis Ritchie",
-      "Charles Babbage",
-      "Ken Thompson"
-    ];
+    List<String> opt1 = ["Dennis Ritchie", "Charles Babbage", "Ken Thompson"];
 
     Question q1 = new Question(
         "Who was the father of computer??", "Charlie Babbage", opt1);

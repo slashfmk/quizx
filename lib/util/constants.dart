@@ -4,7 +4,7 @@ import 'package:quizx/widgets/QOptional.dart';
 // Colors
 //final Color kMainColor = Color(0xFF01b7c4);
 //final Color kMainColor = Color(0xFF0772bd);
-final Color kMainColor = Color(0xff272b34);
+final Color kMainColor = Color(0xFF000000);
 final Color kBlueColor = Color(0xFF49acd5);
 final Color kRedColor = Color(0xFFEC5252);
 final Color kYellowColor = Color(0xFFeaad44);
@@ -27,18 +27,22 @@ final kFontSmallSize =
 final kFontSmallWhiteSize =
     TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: kWhite);
 
+final kFontVeryLargeSize =
+    TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: kWhite);
 // fontSizing
 
 // Box decoration for QOptional
 BoxDecoration kCorrectAnswerDecoration = BoxDecoration(
-    color: kMainColor,
-    borderRadius: BorderRadius.circular(30),
-    border: Border.all(color: Color(0xFFCCCCCC), width: 1));
+  color: kMainColor,
+  borderRadius: BorderRadius.circular(30),
+  border: Border.all(color: Color(0xFFCCCCCC), width: 1),
+);
 
 BoxDecoration kIncorrectAnswerDecoration = BoxDecoration(
-    color: kRedColor,
-    borderRadius: BorderRadius.circular(30),
-    border: Border.all(color: kRedColor, width: 1));
+  color: kRedColor,
+  borderRadius: BorderRadius.circular(30),
+  border: Border.all(color: kRedColor, width: 1),
+);
 
 BoxDecoration kDefaultAnswerDecoration = BoxDecoration(
   color: Color(0xFFeaebee),

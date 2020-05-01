@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quizx/controller/GenQuiz.dart';
-import 'package:quizx/screens/Home_screen.dart';
-import 'package:quizx/screens/Result_screen.dart';
+import 'package:quizx/screens/TestScreen.dart';
+import 'package:quizx/screens/ResultScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:quizx/util/constants.dart';
+import 'package:quizx/screens/CategoryChoiceScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'Quizx',
       initialRoute: '/',
       routes: {
-        '/': (context) => Home(),
-        '/result': (context) => Result_screen()
+        '/': (context) => CategoryChoiceScreen(),
+        '/test': (context) => TestScreen(),
+        '/result': (context) => ResultScreen()
       },
       theme: ThemeData(
           // primarySwatch: Colors.black,

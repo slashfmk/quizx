@@ -1,7 +1,7 @@
 {
   "title" : "Computer science",
   "description" : "All about computer science quiz",
-  "content" :
+  "questions" :
   [
     {
       "id": 1,

@@ -5,27 +5,27 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/WQuestionRecap.dart';
-import 'package:quizx/screens/Home_screen.dart';
+import 'package:quizx/screens/TestScreen.dart';
 import 'package:quizx/util/Calculation.dart';
 import 'package:quizx/widgets/RoundedButton.dart';
 
-class Result_screen extends StatefulWidget {
+class ResultScreen extends StatefulWidget {
   @override
   final List<WrongAnswerRecap> wrongAnswers;
   final int totalQ;
   final String category;
 
-  Result_screen({
+  ResultScreen({
     @required this.category,
     @required this.wrongAnswers,
     @required this.totalQ,
   });
 
-  _Result_screenState createState() => _Result_screenState();
+  _ResultScreenState createState() => _ResultScreenState();
 // Result_screen({this.wrongAnswers});
 }
 
-class _Result_screenState extends State<Result_screen> {
+class _ResultScreenState extends State<ResultScreen> {
   // progressBar Color
   Color _colorPresentationPerformance() {
     Color pBarColor;
@@ -174,7 +174,9 @@ class _Result_screenState extends State<Result_screen> {
                                     'You need to work more',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: 13, color: Colors.grey),
+                                      fontSize: 13,
+                                      color: Colors.grey,
+                                    ),
                                   )
                                 ],
                               )
