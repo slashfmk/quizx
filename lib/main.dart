@@ -5,6 +5,7 @@ import 'package:quizx/screens/ResultScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/screens/CategoryChoiceScreen.dart';
+import 'package:quizx/screens/SplashScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,14 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: kMainColor, //or set color with: Color(0xFF0000FF)
+      statusBarColor: Colors.transparent, //or set color with: Color(0xFF0000FF)
     ));
 
     return MaterialApp(
       title: 'Quizx',
       initialRoute: '/',
       routes: {
-        '/': (context) => CategoryChoiceScreen(),
+        '/': (context) => SplashScreen(),
+        '/home': (context) => CategoryChoiceScreen(),
         '/test': (context) => TestScreen(),
         '/result': (context) => ResultScreen()
       },

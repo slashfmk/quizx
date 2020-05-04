@@ -3,8 +3,8 @@ import 'package:quizx/widgets/QOptional.dart';
 
 // Colors
 //final Color kMainColor = Color(0xFF01b7c4);
-//final Color kMainColor = Color(0xFF0772bd);
-final Color kMainColor = Color(0xFF000000);
+// final Color kMainColor = Color(0xFF0772bd);
+final Color kMainColor = Color(0xFF1d1f2b);
 final Color kBlueColor = Color(0xFF49acd5);
 final Color kRedColor = Color(0xFFEC5252);
 final Color kYellowColor = Color(0xFFeaad44);
@@ -14,7 +14,7 @@ final Color kDarkColor = Color(0xFF1d1f2b);
 final Color kGreyLight = Color(0xFFe9e4e8);
 final Color kGreyColor = Color(0xFF444444);
 
-// bolding  ujn
+// bolding
 const kBoldLight = FontWeight.w300;
 
 // Styles
@@ -28,7 +28,7 @@ final kFontSmallWhiteSize =
     TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: kWhite);
 
 final kFontVeryLargeSize =
-    TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: kWhite);
+    TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: kDarkColor);
 // fontSizing
 
 // Box decoration for QOptional

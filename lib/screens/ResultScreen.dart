@@ -50,7 +50,14 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        backgroundColor: Color(0xFF26252d),
         body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/splash.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           // color: kGreyLight,
           padding: EdgeInsets.only(top: 20),
           child: Column(
@@ -61,19 +68,20 @@ class _ResultScreenState extends State<ResultScreen> {
               Container(
                 // Main container for score
                 // padding: EdgeInsets.all(5),
-                margin: EdgeInsets.all(15),
+                margin:
+                    EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 5),
                 decoration: BoxDecoration(
                   // border: Border.all(color: kGreyColor, width: .1),
-                  boxShadow: [
-                    BoxShadow(
-                        color: kGreyLight,
-                        blurRadius: 0.5,
-                        spreadRadius: 2.0,
-                        offset: Offset(
-                          0.0,
-                          0.0,
-                        ))
-                  ],
+//                  boxShadow: [
+//                    BoxShadow(
+//                        color: kGreyLight,
+//                        blurRadius: 0.5,
+//                        spreadRadius: 2.0,
+//                        offset: Offset(
+//                          0.0,
+//                          0.0,
+//                        ))
+//                  ],
                   color: kMainColor,
                 ),
 
@@ -250,7 +258,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
               // list view Block
               Container(
-                margin: EdgeInsets.all(15),
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                   color: kGreyLight,
                   border: Border.all(color: kDarkColor, width: .2),
@@ -289,14 +297,14 @@ class _ResultScreenState extends State<ResultScreen> {
                     ),
                     Container(
                       height: 350,
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       child: this.widget.wrongAnswers.length > 0
                           ? ListView.builder(
                               itemCount: widget.wrongAnswers.length,
                               itemBuilder: (context, index) {
-                                return ListTile(
-                                    title: new WQuestionRecap(
-                                        wrongAnswerRecap:
-                                            widget.wrongAnswers[index]));
+                                return new WQuestionRecap(
+                                    wrongAnswerRecap:
+                                        widget.wrongAnswers[index]);
                               },
                             )
                           : Row(
@@ -328,12 +336,13 @@ class _ResultScreenState extends State<ResultScreen> {
                     RoundedButton(
                       text: "Main menu",
                       icon: FontAwesomeIcons.checkSquare,
+                      onTap: () => Navigator.pushNamed(context, '/'),
                     ),
                     RoundedButton(
                       text: "Try again",
                       icon: FontAwesomeIcons.redo,
                       onTap: () {
-                        Navigator.pushNamed(context, '/');
+                        Navigator.pushNamed(context, '/test');
                       },
                     )
                   ],

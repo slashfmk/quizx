@@ -116,10 +116,13 @@ class _TestScreenState extends State<TestScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(
-                          Icons.help_outline,
-                          color: kWhite,
-                          size: 40,
+                        Hero(
+                          tag: 'logo',
+                          child: Icon(
+                            Icons.help_outline,
+                            color: kWhite,
+                            size: 40,
+                          ),
                         ),
                         SizedBox(height: 25),
                         Container(
@@ -137,6 +140,7 @@ class _TestScreenState extends State<TestScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               ContainerRadius(
+                                background: kWhite,
                                 child: Row(
                                   children: <Widget>[
                                     Icon(
@@ -209,7 +213,7 @@ class _TestScreenState extends State<TestScreen> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
-                child: Column(
+                child: ListView(
                   //TODO: Implement radio
 
                   // children: createRadioList(),
@@ -219,6 +223,18 @@ class _TestScreenState extends State<TestScreen> {
             ),
             GestureDetector(
               onTap: () {
+                if (selectedOption == null) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('No answer picked'),
+                          content: Text(
+                              'Please select an answer in order to go to the next Question'),
+                        );
+                      });
+                }
+
                 setState(() {
                   if (selectedOption != null) {
                     if (widget._genQuiz
@@ -229,6 +245,7 @@ class _TestScreenState extends State<TestScreen> {
                       correct++;
                     } else {
                       print('false');
+
                       incorrect++;
                       missedQ.add(new WrongAnswerRecap(
                           widget._genQuiz.getCategory().getCurrentQuestion(),
