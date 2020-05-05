@@ -2,7 +2,7 @@ import 'package:quizx/model/Question.dart';
 
 class Categories {
   final List<Question> questions;
-  // final List<Answers> answers;
+  // final List<Question> questions;
   final String categoryName;
   final String categoryDesc;
   int questionNumber = 0;
@@ -16,16 +16,16 @@ class Categories {
 
   factory Categories.fromJson(Map<String, dynamic> json) {
     return Categories(
-      categoryName: json['name'],
-      categoryDesc: json['desc'],
-      questions: parseQuestions(json['questions']),
+      categoryName: json['theCategory'] as String,
+      categoryDesc: json['description'] as String,
+      //  questions: parseQuestions(json['questions']),
     );
   }
 
-  static List<Question> parseQuestions(questionsJson) {
-    List<Question> questionsList = new List<Question>.from(questionsJson);
-    return questionsList;
-  }
+//  static List<Question> parseQuestions(questionsJson) {
+//    List<Question> questionsList = new List<Question>.from(questionsJson);
+//    return questionsList;
+//  }
 
   // get title
   String getName() {

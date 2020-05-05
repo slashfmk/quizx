@@ -108,7 +108,7 @@ class _TestScreenState extends State<TestScreen> {
                   ),
                   Container(
                     width: double.infinity,
-                    // height: 260,
+                    height: MediaQuery.of(context).size.height / 3,
                     //alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                     margin: EdgeInsets.all(5),
@@ -124,7 +124,7 @@ class _TestScreenState extends State<TestScreen> {
                             size: 40,
                           ),
                         ),
-                        SizedBox(height: 25),
+                        // SizedBox(height: 25),
                         Container(
                           alignment: Alignment.center,
                           height: 120,

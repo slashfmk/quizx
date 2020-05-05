@@ -5,10 +5,13 @@ import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/ContainerRadius.dart';
 import 'package:quizx/widgets/CategoryTile.dart';
 import 'package:quizx/util/Networking.dart';
+import 'package:quizx/model/Categories.dart';
 
 class CategoryChoiceScreen extends StatefulWidget {
   @override
   _CategoryChoiceScreenState createState() => _CategoryChoiceScreenState();
+  final Networking httpService =
+      new Networking('http://10.0.2.2:8080/category-api/categories');
 }
 
 class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
@@ -104,17 +107,39 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
 
             // Holds the list of Quizzes
             Container(
-              child: Column(
-                children: <Widget>[
-                  CategoryTile(
-                    title: 'Cs',
-                    description:
-                        'A computer science based quiz with alot to learn, so goodt',
-                    numberOfQuestions: 25,
-                    onTap: () => Navigator.pushNamed(context, '/test'),
-                  ),
-                ],
+              height: 200,
+              child: FutureBuilder(
+                future: widget.httpService.getData(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Categories>> snapshot) {
+                  if (snapshot.hasData) {
+                    List<Categories> categories = snapshot.data;
+                    return ListView(
+                      children: categories
+                          .map((Categories categories) => CategoryTile(
+                                title: categories.categoryName.toString(),
+                                description: categories.categoryDesc,
+
+//                                numberOfQuestions:
+//                                    categories.getNumberOfQuestions(),
+                              ))
+                          .toList(),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
               ),
+//              child: Column(
+//                children: <Widget>[
+//                  CategoryTile(
+//                    title: 'Cs',
+//                    description:
+//                        'A computer science based quiz with alot to learn, so goodt',
+//                    numberOfQuestions: 25,
+//                    onTap: () => Navigator.pushNamed(context, '/test'),
+//                  ),
+//                ],
+//              ),
             ),
             Container(),
           ],

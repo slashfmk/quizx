@@ -48,7 +48,7 @@ class Category {
 
   // Go to the next question
   bool nextQuestion() {
-    if (this._questionNumber - 1 < this._questions.length - 1) {
+    if (this._questionNumber < this._questions.length) {
       this._questionNumber++;
       return true;
     }
