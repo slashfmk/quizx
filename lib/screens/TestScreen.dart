@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quizx/controller/GenQuiz.dart';
+import 'package:quizx/controller/Quiz.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/QOptional.dart';
@@ -11,7 +11,11 @@ import 'package:quizx/screens/ResultScreen.dart';
 class TestScreen extends StatefulWidget {
   @override
   _TestScreenState createState() => _TestScreenState();
-  final GenQuiz _genQuiz = new GenQuiz();
+
+  final String categoryTitle;
+  final String categoryDesc;
+  final int categoryId;
+  TestScreen({this.categoryTitle, this.categoryDesc, this.categoryId});
 }
 
 class _TestScreenState extends State<TestScreen> {
@@ -20,10 +24,14 @@ class _TestScreenState extends State<TestScreen> {
   int incorrect = 0;
   List<WrongAnswerRecap> missedQ = new List();
 
+  Quiz _genQuiz;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _genQuiz =
+        new Quiz(widget.categoryTitle, widget.categoryDesc, widget.categoryId);
   }
 
 //  List<Widget> createRadioList() {
@@ -50,8 +58,7 @@ class _TestScreenState extends State<TestScreen> {
 
   List<QOptional> createOptionaList() {
     List<QOptional> widgets = [];
-    for (String optionals
-        in widget._genQuiz.getCategory().getCurrentOptional()) {
+    for (String optionals in _genQuiz.getCategory().getCurrentOptional()) {
       widgets.add(new QOptional(
         content: optionals,
         onTap: () {
@@ -100,7 +107,7 @@ class _TestScreenState extends State<TestScreen> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    widget._genQuiz.getCategory().getName(),
+                    _genQuiz.getCategory().getName(),
                     style: TextStyle(color: kWhite, fontSize: 15),
                   ),
                   Column(
@@ -129,7 +136,7 @@ class _TestScreenState extends State<TestScreen> {
                           alignment: Alignment.center,
                           height: 120,
                           child: Text(
-                            '${widget._genQuiz.getCategory().getCurrentQuestion()}',
+                            '${_genQuiz.getCategory().getCurrentQuestion()}',
                             style: TextStyle(fontSize: 25, color: kWhite),
                           ),
                         ),
@@ -149,7 +156,7 @@ class _TestScreenState extends State<TestScreen> {
                                       color: kMainColor,
                                     ),
                                     Text(
-                                      ' Question: ${widget._genQuiz.getCategory().getCurrentQuestionNumber()}/${widget._genQuiz.getCategory().getNumberOfQuestions()}',
+                                      ' Question: ${_genQuiz.getCategory().getCurrentQuestionNumber()}/${_genQuiz.getCategory().getNumberOfQuestions()}',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
@@ -237,9 +244,7 @@ class _TestScreenState extends State<TestScreen> {
 
                 setState(() {
                   if (selectedOption != null) {
-                    if (widget._genQuiz
-                            .getCategory()
-                            .getCurrentCorrectAnswer() ==
+                    if (_genQuiz.getCategory().getCurrentCorrectAnswer() ==
                         selectedOption) {
                       print('correct');
                       correct++;
@@ -248,30 +253,27 @@ class _TestScreenState extends State<TestScreen> {
 
                       incorrect++;
                       missedQ.add(new WrongAnswerRecap(
-                          widget._genQuiz.getCategory().getCurrentQuestion(),
+                          _genQuiz.getCategory().getCurrentQuestion(),
                           selectedOption,
-                          widget._genQuiz
-                              .getCategory()
-                              .getCurrentCorrectAnswer()));
+                          _genQuiz.getCategory().getCurrentCorrectAnswer()));
 
                       print(missedQ);
                     }
 
-                    widget._genQuiz.getCategory().nextQuestion();
+                    _genQuiz.getCategory().nextQuestion();
                     setSelectedOptionals(null);
                   }
 
                   //  print(widget._genQuiz.getCategory().getCurrentOptional());
                 });
 
-                if (widget._genQuiz.getCategory().getCurrentQuestionNumber() >
-                    widget._genQuiz.getCategory().getNumberOfQuestions()) {
+                if (_genQuiz.getCategory().getCurrentQuestionNumber() >
+                    _genQuiz.getCategory().getNumberOfQuestions()) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ResultScreen(
-                      category: widget._genQuiz.getCategory().getName(),
+                      category: _genQuiz.getCategory().getName(),
                       wrongAnswers: missedQ,
-                      totalQ:
-                          widget._genQuiz.getCategory().getNumberOfQuestions(),
+                      totalQ: _genQuiz.getCategory().getNumberOfQuestions(),
                     );
                   }));
                 }
@@ -290,14 +292,14 @@ class _TestScreenState extends State<TestScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '${widget._genQuiz.getCategory().isTheEnd() ? 'Result' : 'Next'}',
+                      '${_genQuiz.getCategory().isTheEnd() ? 'Result' : 'Next'}',
                       style: TextStyle(fontSize: 15, color: kWhite),
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Icon(
-                      widget._genQuiz.getCategory().isTheEnd()
+                      _genQuiz.getCategory().isTheEnd()
                           ? FontAwesomeIcons.clipboardList
                           : FontAwesomeIcons.chevronCircleRight,
                       color: kWhite,

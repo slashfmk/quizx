@@ -2,12 +2,12 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:quizx/model/Categories.dart';
 
-class Networking {
+class CategoryService {
   // Attributes
   var _url;
 
-  Networking(String url) {
-    this._url = url;
+  CategoryService() {
+    this._url = 'http://10.0.2.2:4000/category/withquestions';
   }
 
   Future<List<Categories>> getData() async {

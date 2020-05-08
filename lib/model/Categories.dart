@@ -5,21 +5,25 @@ class Categories {
   // final List<Question> questions;
   final String categoryName;
   final String categoryDesc;
+  final int categoryId;
+  final String numberOfQuestions;
   int questionNumber = 0;
 
-  Categories({this.categoryName, this.categoryDesc, this.questions});
-//  {
-//    this._categoryName = name;
-//    this._categoryDesc = desc;
-//    this._questions = questions;
-//  }
+  Categories(
+      {this.categoryId,
+      this.categoryName,
+      this.categoryDesc,
+      this.numberOfQuestions,
+      List<Question> this.questions});
 
   factory Categories.fromJson(Map<String, dynamic> json) {
     return Categories(
-      categoryName: json['theCategory'] as String,
-      categoryDesc: json['description'] as String,
-      //  questions: parseQuestions(json['questions']),
-    );
+        categoryId: json['category_id'] as int,
+        categoryName: json['title'] as String,
+        categoryDesc: json['description'] as String,
+        numberOfQuestions: json['q_count'] as String
+//      questions: parseQuestions(json['theQuestion']),
+        );
   }
 
 //  static List<Question> parseQuestions(questionsJson) {

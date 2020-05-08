@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizx/controller/GenQuiz.dart';
+import 'package:quizx/controller/Quiz.dart';
 import 'package:quizx/screens/TestScreen.dart';
 import 'package:quizx/screens/ResultScreen.dart';
 import 'package:flutter/services.dart';

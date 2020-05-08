@@ -4,7 +4,7 @@ import 'package:quizx/widgets/QOptional.dart';
 // Colors
 //final Color kMainColor = Color(0xFF01b7c4);
 // final Color kMainColor = Color(0xFF0772bd);
-final Color kMainColor = Color(0xFF1d1f2b);
+final Color kMainColor = Color(0xFF202125);
 final Color kBlueColor = Color(0xFF49acd5);
 final Color kRedColor = Color(0xFFEC5252);
 final Color kYellowColor = Color(0xFFeaad44);

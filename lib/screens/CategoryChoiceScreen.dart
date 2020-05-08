@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizx/screens/TestScreen.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/ContainerRadius.dart';
 import 'package:quizx/widgets/CategoryTile.dart';
-import 'package:quizx/util/Networking.dart';
+import 'package:quizx/networking/categoryService.dart';
 import 'package:quizx/model/Categories.dart';
 
 class CategoryChoiceScreen extends StatefulWidget {
   @override
   _CategoryChoiceScreenState createState() => _CategoryChoiceScreenState();
-  final Networking httpService =
-      new Networking('http://10.0.2.2:8080/category-api/categories');
+  final CategoryService httpService = new CategoryService();
 }
 
 class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
@@ -24,7 +24,8 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF202737),
+      // backgroundColor: Color(0xFF202737),
+      backgroundColor: Color(0xFF202125),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 40),
         decoration: BoxDecoration(
@@ -107,7 +108,9 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
 
             // Holds the list of Quizzes
             Container(
-              height: 200,
+              height: MediaQuery.of(context).size.height / 2,
+
+//              children: <Widget>[
               child: FutureBuilder(
                 future: widget.httpService.getData(),
                 builder: (BuildContext context,
@@ -119,6 +122,20 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
                           .map((Categories categories) => CategoryTile(
                                 title: categories.categoryName.toString(),
                                 description: categories.categoryDesc,
+                                numberOfQuestions:
+                                    int.parse(categories.numberOfQuestions),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TestScreen(
+                                          categoryTitle:
+                                              categories.categoryName,
+                                          categoryDesc: categories.categoryDesc,
+                                          categoryId: categories.categoryId,
+                                        ),
+                                      ));
+                                },
 
 //                                numberOfQuestions:
 //                                    categories.getNumberOfQuestions(),
@@ -129,17 +146,6 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
                   return Center(child: CircularProgressIndicator());
                 },
               ),
-//              child: Column(
-//                children: <Widget>[
-//                  CategoryTile(
-//                    title: 'Cs',
-//                    description:
-//                        'A computer science based quiz with alot to learn, so goodt',
-//                    numberOfQuestions: 25,
-//                    onTap: () => Navigator.pushNamed(context, '/test'),
-//                  ),
-//                ],
-//              ),
             ),
             Container(),
           ],
