@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizx/controller/Quiz.dart';
+import 'package:quizx/controller/Cs.dart';
 import 'package:quizx/model/WrongAnswerRecap.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/QOptional.dart';
@@ -24,14 +25,14 @@ class _TestScreenState extends State<TestScreen> {
   int incorrect = 0;
   List<WrongAnswerRecap> missedQ = new List();
 
-  Quiz _genQuiz;
+  Cs _genQuiz;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _genQuiz =
-        new Quiz(widget.categoryTitle, widget.categoryDesc, widget.categoryId);
+        new Cs(widget.categoryTitle, widget.categoryDesc, widget.categoryId);
   }
 
 //  List<Widget> createRadioList() {

@@ -5,7 +5,7 @@ import 'package:quizx/screens/TestScreen.dart';
 import 'package:quizx/util/constants.dart';
 import 'package:quizx/widgets/ContainerRadius.dart';
 import 'package:quizx/widgets/CategoryTile.dart';
-import 'package:quizx/networking/categoryService.dart';
+import 'package:quizx/networking/CategoryService.dart';
 import 'package:quizx/model/Categories.dart';
 
 class CategoryChoiceScreen extends StatefulWidget {
@@ -94,7 +94,7 @@ class _CategoryChoiceScreenState extends State<CategoryChoiceScreen> {
                     padding: EdgeInsets.all(10),
                     color: kBlueColor,
                     child: Text(
-                      'There are 20 quizzes',
+                      'There are 2 quizzes',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

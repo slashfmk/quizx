@@ -336,7 +336,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     RoundedButton(
                       text: "Main menu",
                       icon: FontAwesomeIcons.checkSquare,
-                      onTap: () => Navigator.pushNamed(context, '/'),
+                      onTap: () => Navigator.pushNamed(context, '/home'),
                     ),
                     RoundedButton(
                       text: "Try again",
